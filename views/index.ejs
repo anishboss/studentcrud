@@ -1,0 +1,75 @@
+<%- include('./partials/header.ejs',{title:"Student Homepage"}) %>
+   <%- include('./partials/navbar.ejs') %>
+  
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col-sm-6">
+        <h2 class="alert alert-success text-center">Add Student</h2>
+        <form action="/" method="post">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Grade</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="grade">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Address</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="address">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Add Student</button>
+        </form>
+
+      </div>
+      <div class="col-sm-6">
+        <h2 class="alert alert-success text-center">Student List</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">S.N</th>
+              <th scope="col">Name</th>
+              <th scope="col">Grade</th>
+              <th scope="col">Address</th>
+              <th scope="col">Operation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% let i=1 %>
+              <% students.forEach((student)=>{ %>
+                <tr>
+                  <th scope="row">
+                    <%= i++ %>
+                  </th>
+                  <td>
+                    <%= student.name %>
+                  </td>
+                  <td>
+                    <%= student.grade %>
+                  </td>
+                  <td>
+                    <%= student.address %>
+                  </td>
+                  <td>
+                    <form action="/edit/<%= student._id %>" method="get" class="d-inline"><button
+                        class="btn btn-secondary">Edit</button></form>
+                    <form action="/delete/<%= student._id %>" method="post" class="d-inline"><button
+                        class="btn btn-danger">Delete</button></form>
+                  </td>
+                </tr>
+                <% }) %>
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+<%- include('./partials/footer.ejs') %>
